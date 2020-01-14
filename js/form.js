@@ -1,77 +1,101 @@
-
-//Selecionando o id do botão e colocando-o dentro da variável.
 var botaoAdicionar = document.querySelector("#adicionar-paciente");
-//Criando um evento quando o botão for clicado.
-//Esse evento possui uma função anônima que faz adicionar uma linha na tabela.
+
 botaoAdicionar.addEventListener("click", function(event) {
+    event.preventDefault();
+    var form = document.querySelector("#form-adiciona");
+    var paciente = obtemPacienteDoFormulario(form);
 
-//Limpa a ação default do evento.
-event.preventDefault();
 
-// Seleciona o pedaço do HTML que
-// contenha o id form-adiciona e coloca dentro da variável.
-var form = document.querySelector("#form-adiciona");
 
-//Extraindo as informações do paciente do form
-var paciente = obtemPacienteDoFormulario(form);
-//cria a a linha e as células dos pacientes na tabela
-var pacienteTr = montaTr(paciente);
+   var erros = validaPaciente(paciente);
+    if (erros.length > 0) {
+      exibeMensagensDeErro(erros);
+       return;
+        }
 
-// Seleciona o pedaço do HTML que
-// contenha o id tabela-pacientes e coloca dentro da variável.
-var tabela = document.querySelector("#tabela-pacientes");
+    var pacienteTr = montaTr(paciente);
 
-// Importa as informações da tabela (td) para dentro do tr.
-tabela.appendChild(pacienteTr);
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+    form.reset();
+    
+    var mensagensErro = document.querySelector("#mensagens-erro");
+    mensagensErro.innerHTML = "";
 
-//Limpar o from depois que incluir um paciente.
-form.reset();
-
-})
-
+});
 
 function obtemPacienteDoFormulario(form) {
 
-//Criação do objeto paciente com seus atributos.
-  var paciente = {
-    nome: form.nome.value,
-    peso: form.peso.value,
-    altura: form.altura.value,
-    gordura: form.gordura.value,
-    //Utilizando o resultado da função de calcular IMC para a definição do parâmetro.
-    imc: calculaImc(form.peso.value, form.altura.value)
-  }
+    var paciente = {
+        nome: form.nome.value,
+        peso: form.peso.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value,
+        imc: calculaImc(form.peso.value, form.altura.value)
+    }
 
-return paciente;
-
+    return paciente;
 }
 
 function montaTr(paciente) {
+    var pacienteTr = document.createElement("tr");
+    pacienteTr.classList.add("paciente");
 
-//criando o elemento td e colocando dentro da variável
-  var pacienteTr = document.createElement("tr");
-  //Adicionando a classe paciente na linha da tabela (tr)
-  pacienteTr.classList.add("paciente");
+    pacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
+    pacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
+    pacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
+    pacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
+    pacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
 
-//Incluindo os tds dentro da tr e montando ode acordo com as informações do objeto criado.
-  pacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
-  pacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
-  pacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
-  pacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
-  pacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
-
-//Retorna a linha do paciente
-return pacienteTr;
+    return pacienteTr;
 }
 
-
 function montaTd(dado, classe) {
-  //criando o elemento td e colocando dentro da variável
-  var td = document.createElement("td");
-  //pegando a informação dentro da tag
-  td.textContent = dado;
-  //Adicionando uma classe
-  td.classList.add(classe);
-  //Retorna o elemento criado
-  return td;
+    var td = document.createElement("td");
+    td.classList.add(classe);
+    td.textContent = dado;
+
+    return td;
+}
+
+function validaPaciente(paciente) {
+
+    var erros = [];
+
+    if (paciente.nome.length == 0) {
+        erros.push("O nome não pode ser em branco");
+    }
+
+    if (paciente.gordura.length == 0) {
+        erros.push("A gordura não pode ser em branco");
+    }
+
+    if (paciente.peso.length == 0) {
+        erros.push("O peso não pode ser em branco");
+    }
+
+    if (paciente.altura.length == 0) {
+        erros.push("A altura não pode ser em branco");
+    }
+
+    if (!validaPeso(paciente.peso)) {
+        erros.push("Peso é inválido");
+    }
+
+    if (!validaAltura(paciente.altura)) {
+        erros.push("Altura é inválida");
+    }
+
+    return erros;
+}
+
+function exibeMensagensDeErro(erros) {
+    var ul = document.querySelector("#mensagens-erro");
+    ul.innerHTML = "";
+
+    erros.forEach(function(erro) {
+        var li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
 }
