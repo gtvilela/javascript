@@ -6,21 +6,22 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link rel="stylesheet" type="text/css" href="css/index.css">
-		<link rel=""
+
 	</head>
 	<body>
 
 		<header>
 			<div class="container">
-				<h1 >Aparecida Nutrição</h1>
+				<h2 class="titulo">Aparecida Nutrição</h2>
 			</div>
 		</header>
+
 		<main>
+
 			<section class="container">
 				<h2>Meus pacientes</h2>
-				<label for="filtrar-tabela">Filtre:</label>
-				<input type="text" name="filtro" id="filtrar-tabela" placeholder="Digite o nome do paciente">
-			</br>
+				<label for="filtrar-tabela">Filtrar pacientes:</label>
+				<input type="text" id="filtrar-tabela" name="filtrar" placeholder="Digite aqui o nome do paciente"></input>
 				<table>
 					<thead>
 						<tr>
@@ -32,10 +33,10 @@
 						</tr>
 					</thead>
 					<tbody id="tabela-pacientes">
-						<tr class="paciente" id="primeiropaciente">
+						<tr class="paciente" id="primeiro-paciente">
 							<td class="info-nome">Paulo</td>
 							<td class="info-peso">100</td>
-							<td class="info-altura">1.98</td>
+							<td class="info-altura">2.00</td>
 							<td class="info-gordura">10</td>
 							<td class="info-imc">0</td>
 						</tr>
@@ -70,45 +71,42 @@
 							<td class="info-gordura">19</td>
 							<td class="info-imc">0</td>
 						</tr>
-						<tr class="paciente" >
-							<td class="info-nome">Pedro</td>
-							<td class="info-peso">78</td>
-							<td class="info-altura">1.67</td>
-							<td class="info-gordura">15</td>
-							<td class="info-imc">0</td>
-						</tr>
 					</tbody>
 				</table>
-
+  		<button id="buscar-paciente" class="botao bto-principal">Buscar Paciente</button>
 			</section>
 		</main>
-		<section class="container">
-    <h2 id="titulo-form">Adicionar novo paciente</h2>
-		<ul id="mensagens-erro"></ul>
-    <form id="form-adiciona">
-        <div class="grupo">
-            <label for="nome">Nome:</label>
-            <input id="nome" name="nome" type="text" placeholder="digite o nome do seu paciente" class="campo">
-        </div>
-        <div class="grupo">
-            <label for="peso">Peso:</label>
-            <input id="peso" name="peso" type="text" placeholder="digite o peso do seu paciente" class="campo campo-medio">
-        </div>
-        <div class="grupo">
-            <label for="altura">Altura:</label>
-            <input id="altura" name="altura" type="text" placeholder="digite a altura do seu paciente" class="campo campo-medio">
-        </div>
-        <div class="grupo">
-            <label for="gordura">% de Gordura:</label>
-            <input id="gordura" type="text" placeholder="digite a porcentagem de gordura do seu paciente" class="campo campo-medio">
-        </div>
 
-        <button id="adicionar-paciente" class="botao bto-principal">Adicionar</button>
-    </form>
-</section>
-		<script src="js/main.js"></script>
-		<script src="js/form.js"></script>
-		<script src="js/remover_paciente.js"></script>
-		<script src="js/filtra.js"></script>
+		<section class="container">
+		    <h2 id="titulo-form">Adicionar novo paciente</h2>
+			<ul id="mensagens-erro"></ul>
+		    <form id="form-adiciona">
+		        <div class="">
+		            <label for="nome">Nome:</label>
+		            <input id="nome" name="nome" type="text" placeholder="digite o nome do seu paciente" class="campo">
+		        </div>
+		        <div class="grupo">
+		            <label for="peso">Peso:</label>
+		            <input id="peso" name="peso" type="text" placeholder="digite o peso do seu paciente" class="campo campo-medio">
+		        </div>
+		        <div class="grupo">
+		            <label for="altura">Altura:</label>
+		            <input id="altura" name="altura" type="text" placeholder="digite a altura do seu paciente" class="campo campo-medio">
+		        </div>
+		        <div class="grupo">
+		            <label for="gordura">% de Gordura:</label>
+		            <input id="gordura" type="text" placeholder="digite a porcentagem de gordura do seu paciente" class="campo campo-medio">
+		        </div>
+
+		        <button id="buscar-pacientes" class="botao bto-principal">Adicionar</button>
+		    </form>
+		</section>
+
+		<script src="js/main.js" ></script>
+		<script src="js/form.js" ></script>
+		<script src="js/filtra.js" ></script>
+		<script src="js/remover_paciente.js" ></script>
+		<script src="js/buscar_pacientes.js" ></script>
+
 	</body>
 </html>

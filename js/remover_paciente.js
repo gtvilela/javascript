@@ -3,7 +3,7 @@
 var pacientes = document.querySelectorAll(".paciente");
 
 //Pega a tabela inteira
-var tabela = document.querySelector("table");
+var tabela = document.querySelector("#tabela-pacientes");
 
 //Dentro da tabela, ao dar duplo clique em alguma célula, a tabela escutará o evento
 //ver quem é o alvo do evento (td) e remover o pai dele (tr)
