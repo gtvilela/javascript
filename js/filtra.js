@@ -1,14 +1,14 @@
 var campoFiltro = document.querySelector("#filtrar-tabela");
 
 campoFiltro.addEventListener("input", function() {
-    this.value
+  this.value
 
-    var pacientes = document.querySelectorAll(".paciente");
+  var pacientes = document.querySelectorAll(".paciente");
 
-    //Condição para os valores da tabela com o tamanho maior que zero
-   if (this.value.length > 0) {
-     //Laço para passar por todos os pacientes através do nome
-     for (var i = 0; i < pacientes.length; i++) {
+  //Condição para os valores da tabela com o tamanho maior que zero
+  if (this.value.length > 0) {
+    //Laço para passar por todos os pacientes através do nome
+    for (var i = 0; i < pacientes.length; i++) {
       var paciente = pacientes[i];
       var tdNome = paciente.querySelector(".info-nome");
       var nome = tdNome.textContent;
@@ -23,15 +23,15 @@ campoFiltro.addEventListener("input", function() {
         paciente.classList.remove("invisivel");
       }
 
-     }
-   }
-   else {
-     //Caso não seja digitado nenhum, ele retira a classe que esconde os pacientes da tabela
-      for (var i = 0; i < pacientes.length; i++) {
-        var paciente = pacientes[i];
-        paciente.classList.remove("invisivel");
-      }
-   }
+    }
+  }
+  else {
+    //Caso não seja digitado nenhum, ele retira a classe que esconde os pacientes da tabela
+    for (var i = 0; i < pacientes.length; i++) {
+      var paciente = pacientes[i];
+      paciente.classList.remove("invisivel");
+    }
+  }
 
 
 });
